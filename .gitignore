@@ -9,3 +9,7 @@ settings.json
 ### AI ###
 CLAUDE.md
 .claude/
+.aider*
+logs/
+.commit0_scripts/
+.github/workflows/

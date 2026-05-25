@@ -23,59 +23,34 @@ import com.github.wnameless.json.base.JsonPrinter;
 
 /**
  * {@link JsonifyArrayList} is simply a ArrayList but with an override jsonify toString method.
- * 
+ *
  * @author Wei-Ming Wu
- * 
+ *
  * @param <E> the type of elements
  */
 public class JsonifyArrayList<E> extends ArrayList<E> {
 
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  private CharSequenceTranslator translator =
-      StringEscapePolicy.DEFAULT.getCharSequenceTranslator();
+    private CharSequenceTranslator translator = StringEscapePolicy.DEFAULT.getCharSequenceTranslator();
 
-  public JsonifyArrayList() {}
-
-  public JsonifyArrayList(Collection<E> coll) {
-    super(coll);
-  }
-
-  public void setTranslator(CharSequenceTranslator translator) {
-    this.translator = translator;
-  }
-
-  public String toString(PrintMode printMode) {
-    switch (printMode) {
-      case PRETTY:
-        return JsonPrinter.prettyPrint(toString());
-      default:
-        return toString();
+    public JsonifyArrayList() {
     }
-  }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append('[');
-    for (E e : this) {
-      if (e instanceof String) {
-        sb.append('"');
-        sb.append(translator.translate((String) e));
-        sb.append('"');
-      } else if (e instanceof Collection) {
-        sb.append(new JsonifyArrayList<>((Collection<?>) e));
-      } else if (e instanceof Map) {
-        sb.append(new JsonifyLinkedHashMap<>((Map<?, ?>) e));
-      } else {
-        sb.append(e);
-      }
-      sb.append(',');
+    public JsonifyArrayList(Collection<E> coll) {
+        super(coll);
     }
-    if (sb.length() > 1) sb.setLength(sb.length() - 1);
-    sb.append(']');
 
-    return sb.toString();
-  }
+    public void setTranslator(CharSequenceTranslator translator) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
+    public String toString(PrintMode printMode) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

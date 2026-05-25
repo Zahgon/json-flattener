@@ -23,119 +23,91 @@ import java.util.function.Consumer;
 import com.github.wnameless.json.base.JsonCore;
 
 /**
- * 
  * {@link JsonUnflattenerFactory} preserves the configuration of a {@link JsonUnflattener}, in doing
  * so, any input JSON data can be used to create a {@link JsonUnflattener} object with the same
  * configuration.
- * 
- * @author Wei-Ming Wu
  *
+ * @author Wei-Ming Wu
  */
 public final class JsonUnflattenerFactory {
 
-  private final Consumer<JsonUnflattener> configurer;
-  private final Optional<JsonCore<?>> jsonCore;
+    private final Consumer<JsonUnflattener> configurer;
 
-  /**
-   * Returns a {@link JsonUnflattenerFactory}.
-   * 
-   * @param configurer a functional interface used to set up the configuration of a
-   *        {@link JsonUnflattener}.
-   */
-  public JsonUnflattenerFactory(Consumer<JsonUnflattener> configurer) {
-    if (configurer == null) throw new NullPointerException();
-    this.configurer = configurer;
-    this.jsonCore = Optional.empty();
-  }
+    private final Optional<JsonCore<?>> jsonCore;
 
-  /**
-   * Returns a {@link JsonUnflattenerFactory}.
-   * 
-   * @param configurer a functional interface used to set up the configuration of a
-   *        {@link JsonUnflattener}.
-   * @param jsonCore a {@link JsonCore}
-   */
-  public JsonUnflattenerFactory(Consumer<JsonUnflattener> configurer, JsonCore<?> jsonCore) {
-    if (configurer == null) throw new NullPointerException();
-    this.configurer = configurer;
-    this.jsonCore = Optional.of(jsonCore);
-  }
-
-  /**
-   * Creates a {@link JsonUnflattener} by given JSON string and configures it with the configurer
-   * and jsonCore within this {@link JsonUnflattenerFactory}.
-   * 
-   * @param json the JSON string
-   * @return a {@link JsonUnflattener}
-   */
-  public JsonUnflattener build(String json) {
-    JsonUnflattener jf;
-    if (jsonCore.isPresent()) {
-      jf = new JsonUnflattener(jsonCore.get(), json);
-    } else {
-      jf = new JsonUnflattener(json);
+    /**
+     * Returns a {@link JsonUnflattenerFactory}.
+     *
+     * @param configurer a functional interface used to set up the configuration of a
+     *        {@link JsonUnflattener}.
+     */
+    public JsonUnflattenerFactory(Consumer<JsonUnflattener> configurer) {
+        if (configurer == null)
+            throw new NullPointerException();
+        this.configurer = configurer;
+        this.jsonCore = Optional.empty();
     }
 
-    configurer.accept(jf);
-    return jf;
-  }
-
-  /**
-   * Creates a {@link JsonUnflattener} by given flattened {@link Map} and configures it with the
-   * configurer and jsonCore within this {@link JsonUnflattenerFactory}.
-   * 
-   * @param flattenedMap a flattened {@link Map}
-   * @return a {@link JsonUnflattener}
-   */
-  public JsonUnflattener build(Map<String, ?> flattenedMap) {
-    JsonUnflattener jf;
-    if (jsonCore.isPresent()) {
-      jf = new JsonUnflattener(jsonCore.get(), flattenedMap);
-    } else {
-      jf = new JsonUnflattener(flattenedMap);
+    /**
+     * Returns a {@link JsonUnflattenerFactory}.
+     *
+     * @param configurer a functional interface used to set up the configuration of a
+     *        {@link JsonUnflattener}.
+     * @param jsonCore a {@link JsonCore}
+     */
+    public JsonUnflattenerFactory(Consumer<JsonUnflattener> configurer, JsonCore<?> jsonCore) {
+        if (configurer == null)
+            throw new NullPointerException();
+        this.configurer = configurer;
+        this.jsonCore = Optional.of(jsonCore);
     }
-    configurer.accept(jf);
-    return jf;
-  }
 
-  /**
-   * Creates a {@link JsonUnflattener} by given JSON reader and configures it with the configurer
-   * and jsonCore within this {@link JsonUnflattenerFactory}.
-   * 
-   * @param jsonReader a JSON reader
-   * @return a {@link JsonUnflattener}
-   * @throws IOException if the jsonReader cannot be read
-   */
-  public JsonUnflattener build(Reader jsonReader) throws IOException {
-    JsonUnflattener jf;
-    if (jsonCore.isPresent()) {
-      jf = new JsonUnflattener(jsonCore.get(), jsonReader);
-    } else {
-      jf = new JsonUnflattener(jsonReader);
+    /**
+     * Creates a {@link JsonUnflattener} by given JSON string and configures it with the configurer
+     * and jsonCore within this {@link JsonUnflattenerFactory}.
+     *
+     * @param json the JSON string
+     * @return a {@link JsonUnflattener}
+     */
+    public JsonUnflattener build(String json) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    configurer.accept(jf);
-    return jf;
-  }
 
-  @Override
-  public int hashCode() {
-    int result = 27;
-    result = 31 * result + configurer.hashCode();
-    result = 31 * result + jsonCore.hashCode();
-    return result;
-  }
+    /**
+     * Creates a {@link JsonUnflattener} by given flattened {@link Map} and configures it with the
+     * configurer and jsonCore within this {@link JsonUnflattenerFactory}.
+     *
+     * @param flattenedMap a flattened {@link Map}
+     * @return a {@link JsonUnflattener}
+     */
+    public JsonUnflattener build(Map<String, ?> flattenedMap) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof JsonUnflattenerFactory)) return false;
-    JsonUnflattenerFactory other = (JsonUnflattenerFactory) o;
-    return configurer.equals(other.configurer) && jsonCore.equals(other.jsonCore);
-  }
+    /**
+     * Creates a {@link JsonUnflattener} by given JSON reader and configures it with the configurer
+     * and jsonCore within this {@link JsonUnflattenerFactory}.
+     *
+     * @param jsonReader a JSON reader
+     * @return a {@link JsonUnflattener}
+     * @throws IOException if the jsonReader cannot be read
+     */
+    public JsonUnflattener build(Reader jsonReader) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  public String toString() {
-    return "JsonUnflattenerFactory{configurer=" + configurer + ", jsonCore=" + jsonCore + "}";
-  }
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }
